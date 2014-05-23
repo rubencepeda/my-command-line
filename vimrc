@@ -1,3 +1,39 @@
+" Use vim settings, rather then vi settings (much better!)
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
+set number
+set showmatch
+set history=1000                " remember more commands and search history
+set undolevels=1000             " use many muchos levels of undo
+set ruler                       " show the cursor position all the time
+set hlsearch                    " search highlighting
+set showmode                    " Show current mode
+set hlsearch
+set magic                       " Use magic regexes (much less faffy escaping)
+set list listchars=tab:»·,trail:· " Show me those sneaky tabs and trailing spaces
+
+" Make search case-insensitive when search string is all lowercase
+set ignorecase
+set smartcase
+
+" Editor layout {{{
+set termencoding=utf-8
+set encoding=utf-8
+set lazyredraw                  " don't update the display while executing macros
+set cmdheight=2                 " use a status bar that is 2 rows high
+" }}}
+
+if has('statusline')
+  set laststatus=2
+  set statusline=[%n]\ %<%F\ \ \ %w%h%m%r\ \ \ [%M%R%H%W%Y][%{&ff}]\ \ %=\ line:%l/%L\ col:%c\ \ \ %p%%\ \ \ @%{strftime(\"%H:%M:%S\")}\ \ ascii:%b\ 
+endif
+
+" Thanks to Steve Losh for this liberating tip
+" See http://stevelosh.com/blog/2010/09/coming-home-to-vim
+nnoremap / /\v
+vnoremap / /\v
+
 syntax on
 filetype on                   " Enable filetype detection
 filetype indent on            " Enable filetype-specific indenting
@@ -24,17 +60,6 @@ set ruler                   " Show the ruler
 set rulerformat=%30(%=\:b%n%y%m%r%w\ %l,%c%V\ %P%) " A ruler on steroids
 set showcmd                 " Show partial commands in status line and
                             " Selected characters/lines in visual mode
-set laststatus=2
-
-" Broken down into easily includeable segments
-"set statusline=\ %f%m%r%h%w\ %=%({%{&ff}\|%{(&fenc==\"\"?&enc:&fenc).((exists(\"+bomb\")\ &&\ &bomb)?\",B\":\"\")}%k\|%Y}%)\ %([%l,%v][%p%%]\ %)
-"set statusline=%f         " Path to the file
-"set statusline+=%=        " Switch to the right side
-"set statusline+=%l        " Current line
-"set statusline+=:         " Separator
-"set statusline+=%L        " Total lines
-"set statusline=%<%F%h%m%r%h%w%y\ %{&ff}\ %{strftime(\"%d/%m/%Y-%H:%M\")}%=\ col:%c%V\ ascii:%b\ pos:%o\ lin:%l\,%L\ %P
-set statusline=[%n]\ %<%F\ \ \ [%M%R%H%W%Y][%{&ff}]\ \ %=\ line:%l/%L\ col:%c\ \ \ %p%%\ \ \ @%{strftime(\"%H:%M:%S\")}\ \ ascii:%b\ 
 
 set backspace=indent,eol,start  " Backspace for dummies
 set linespace=0                 " No extra spaces between rows
